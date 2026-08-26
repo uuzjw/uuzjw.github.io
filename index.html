@@ -168,6 +168,15 @@
       max-width: 90vw; text-align: center;
     }
     .toast.show { opacity: 1; visibility: visible; }
+    .crab-rain {
+      position: fixed; top: -60px; z-index: 90; pointer-events: none;
+      animation: crab-fall linear forwards;
+    }
+    @keyframes crab-fall {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
     #to-top:hover { border-color: var(--brand); color: var(--brand-hi); }
     footer { border-top: 1px solid var(--border); padding: 1.6rem 0; text-align: center; color: var(--text-3); font-size: .85rem; }
     footer a { color: var(--text-2); }
@@ -545,6 +554,45 @@
         btn.classList.toggle("show", window.scrollY > 600);
       }, { passive: true });
       btn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    })();
+
+    // KONAMI code -> crab rain
+    (function () {
+      var SEQ = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+      var pos = 0, raining = false;
+      var MSGS = {
+        zh: "🦀🦀🦀 秘技发动！螃蟹雨！",
+        en: "🦀🦀🦀 KONAMI! CRAB RAIN!"
+      };
+      document.addEventListener("keydown", function (e) {
+        var k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        if (k === SEQ[pos]) {
+          pos++;
+          if (pos === SEQ.length) { pos = 0; crabRain(); }
+        } else {
+          pos = (k === SEQ[0]) ? 1 : 0;
+        }
+      });
+      function crabRain() {
+        showToast((MSGS[lang] || MSGS.en));
+        if (raining) return;
+        raining = true;
+        var n = 42;
+        for (var i = 0; i < n; i++) {
+          (function (i) {
+            var c = document.createElement("div");
+            c.className = "crab-rain";
+            c.textContent = "🦀";
+            c.style.left = (Math.random() * 100) + "vw";
+            c.style.fontSize = (16 + Math.random() * 30) + "px";
+            c.style.animationDuration = (2.2 + Math.random() * 2.6) + "s";
+            c.style.animationDelay = (Math.random() * 1.4) + "s";
+            document.body.appendChild(c);
+            setTimeout(function () { c.remove(); }, 6500);
+          })(i);
+        }
+        setTimeout(function () { raining = false; }, 4000);
+      }
     })();
 
     // avatar easter egg (toast feedback, works with reduced motion)
