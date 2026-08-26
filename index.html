@@ -185,6 +185,10 @@
   </style>
 </head>
 <body>
+  <a href="#about" style="position:absolute;left:-9999px;top:0;z-index:200;background:var(--brand);color:#fff;padding:.6rem 1rem;border-radius:8px" onfocus="this.style.left='1rem'" onblur="this.style.left='-9999px'">Skip to content</a>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"uuzjw","url":"https://uuzjw.github.io/","email":"mailto:nvidiashanghai@126.com","sameAs":["https://github.com/uuzjw"],"jobTitle":"Open Source Enthusiast / Indie Developer","knowsAbout":["AI Agents","LLM","Python","Terminal tools","ARM64","Jetson"]}
+  </script>
   <div class="bg-orbs" aria-hidden="true">
     <span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span>
   </div>
@@ -240,6 +244,7 @@
           <div class="fact"><span class="ico">🤖</span><span><b data-i18n="fact_focus">方向</b>：AI Agent · LLM</span></div>
           <div class="fact"><span class="ico">🔧</span><span><b data-i18n="fact_lang">主力语言</b>：Python · HTML</span></div>
           <div class="fact"><span class="ico">🖥️</span><span><b data-i18n="fact_platform">折腾平台</b>：终端 · Jetson 边缘设备</span></div>
+          <div class="fact"><span class="ico">📊</span><span><b id="gh-stats">GitHub: …</b></span></div>
           <div class="fact"><span class="ico">📬</span><span>nvidiashanghai@126.com</span></div>
         </div>
       </div>
@@ -567,6 +572,22 @@
         showToast(set[Math.min(clicks, 3)]);
         clicks = clicks >= 4 ? 0 : clicks + 1;
       });
+    })();
+
+    // aggregate github profile stats
+    (function () {
+      var el = document.getElementById("gh-stats");
+      if (!el) return;
+      fetch("https://api.github.com/users/uuzjw")
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (u) {
+          if (!u) { el.textContent = "GitHub @uuzjw"; return; }
+          fetch("https://api.github.com/users/uuzjw/repos?per_page=100").then(function (r) { return r.json(); }).then(function (repos) {
+            var stars = 0; (repos || []).forEach(function (r) { stars += r.stargazers_count; });
+            el.textContent = "GitHub: " + u.public_repos + (lang === "zh" ? " 个公开仓库 · " : " public repos · ") + stars + " ★ · " + u.followers + (lang === "zh" ? " 关注者" : " followers");
+          });
+        })
+        .catch(function () { el.textContent = "GitHub @uuzjw"; });
     })();
 
     // live github stats (graceful fallback to hardcoded)
