@@ -396,12 +396,12 @@
       }
     };
 
-    var lang = localStorage.getItem("uuzjw-lang") || "en";
+    var lang = localStorage.getItem("uuzjw-lang-v2") || "en";
     var typedTimer = null;
 
     function applyLang(l) {
       lang = l;
-      localStorage.setItem("uuzjw-lang", l);
+      localStorage.setItem("uuzjw-lang-v2", l);
       document.documentElement.lang = l === "zh" ? "zh-CN" : "en";
       document.title = I18N[l].title;
       var dict = I18N[l];
