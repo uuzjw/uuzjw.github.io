@@ -135,6 +135,8 @@
     .contact-box { text-align: center; background: linear-gradient(135deg, rgba(198,90,58,.16), rgba(232,146,110,.1)); border: 1px solid var(--border); border-radius: 20px; padding: 3rem 2rem; }
     .contact-box h2 { font-size: 1.7rem; margin-bottom: .5rem; }
     .contact-box p { color: var(--text-2); margin-bottom: 1.8rem; }
+    .mail-row { display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap; }
+    .copy-btn.copied { border-color: #10b981; color: #10b981; }
 
     footer { border-top: 1px solid var(--border); padding: 1.6rem 0; text-align: center; color: var(--text-3); font-size: .85rem; }
     footer a { color: var(--text-2); }
@@ -318,7 +320,10 @@
       <div class="contact-box reveal">
         <h2 data-i18n="contact_t">联系我</h2>
         <p data-i18n="contact_p">欢迎交流 AI Agent、终端工具、边缘计算，或单纯打个招呼 👋</p>
-        <a class="btn btn-primary" href="mailto:nvidiashanghai@126.com">📬 nvidiashanghai@126.com</a>
+        <div class="mail-row">
+          <a class="btn btn-primary" href="mailto:nvidiashanghai@126.com">📬 nvidiashanghai@126.com</a>
+          <button class="btn btn-ghost copy-btn" id="copy-mail" type="button">📋 <span data-i18n="copy">复制邮箱</span></button>
+        </div>
         &nbsp;
         <a class="btn btn-ghost" href="https://github.com/uuzjw" target="_blank" rel="noopener noreferrer">GitHub @uuzjw</a>
       </div>
@@ -357,6 +362,7 @@
         sk3_t: "Edge & Systems", sk3_1: "Jetson / ARM64 adaptation", sk3_2: "Network namespaces / sandbox", sk3_3: "AST static analysis", sk3_4: "Terminal UI (Rich)",
         sk4_t: "Engineering", sk4_1: "Open source collaboration", sk4_2: "Bilingual docs (EN/ZH)", sk4_3: "Static site deployment", sk4_4: "Safety by default",
         contact_t: "Get in Touch", contact_p: "Happy to talk about AI agents, terminal tools, edge computing — or just say hi 👋",
+        copy: "Copy email", copied: "Copied ✓",
         footer: "made with ❤ and terminals",
         typed: ["AI Agents & LLM apps", "Terminal tools & automation", "ARM64 edge development", "Open source — simple, open, extensible"]
       },
@@ -384,12 +390,13 @@
         sk3_t: "边缘与系统", sk3_1: "Jetson / ARM64 适配", sk3_2: "网络命名空间 / 沙盒", sk3_3: "AST 静态分析", sk3_4: "终端 UI（Rich）",
         sk4_t: "工程实践", sk4_1: "开源协作", sk4_2: "中英双语文档", sk4_3: "静态站点部署", sk4_4: "安全默认设计",
         contact_t: "联系我", contact_p: "欢迎交流 AI Agent、终端工具、边缘计算，或单纯打个招呼 👋",
+        copy: "复制邮箱", copied: "已复制 ✓",
         footer: "用 ❤ 和终端制造",
         typed: ["AI Agent 与 LLM 应用", "终端工具与自动化", "ARM64 边缘设备开发", "开源，简单、开放、可扩展"]
       }
     };
 
-    var lang = localStorage.getItem("uuzjw-lang") || "zh";
+    var lang = localStorage.getItem("uuzjw-lang") || "en";
     var typedTimer = null;
 
     function applyLang(l) {
@@ -432,6 +439,35 @@
       applyLang(lang === "zh" ? "en" : "zh");
     });
     applyLang(lang);
+
+    // copy email
+    (function () {
+      var btn = document.getElementById("copy-mail");
+      var EMAIL = "nvidiashanghai@126.com";
+      btn.addEventListener("click", function () {
+        function done() {
+          var dict = I18N[lang];
+          var label = btn.querySelector("span");
+          label.textContent = dict.copied;
+          btn.classList.add("copied");
+          setTimeout(function () {
+            label.textContent = dict.copy;
+            btn.classList.remove("copied");
+          }, 1600);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(EMAIL).then(done);
+        } else {
+          var ta = document.createElement("textarea");
+          ta.value = EMAIL;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          done();
+        }
+      });
+    })();
 
     (function () {
       var io = new IntersectionObserver(function (entries) {
