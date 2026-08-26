@@ -157,7 +157,17 @@
       opacity: 0; pointer-events: none; transform: translateY(10px);
       transition: all .3s cubic-bezier(.16,1,.3,1); box-shadow: 0 8px 24px -8px var(--glow);
     }
-    #to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+#to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+    .toast {
+      position: fixed; left: 50%; bottom: 5.2rem; z-index: 100;
+      transform: translateX(-50%);
+      background: var(--surface); color: var(--text); border: 1px solid var(--brand);
+      border-radius: 12px; padding: .7rem 1.2rem; font-size: .92rem; font-weight: 600;
+      box-shadow: 0 12px 32px -8px var(--glow);
+      opacity: 0; visibility: hidden; transition: opacity .25s ease;
+      max-width: 90vw; text-align: center;
+    }
+    .toast.show { opacity: 1; visibility: visible; }
     #to-top:hover { border-color: var(--brand); color: var(--brand-hi); }
     footer { border-top: 1px solid var(--border); padding: 1.6rem 0; text-align: center; color: var(--text-3); font-size: .85rem; }
     footer a { color: var(--text-2); }
@@ -532,18 +542,30 @@
       btn.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
     })();
 
-    // avatar easter egg
+    // avatar easter egg (toast feedback, works with reduced motion)
     (function () {
       var av = document.getElementById("avatar");
-      var clicks = 0;
+      var toast = document.createElement("div");
+      toast.className = "toast";
+      document.body.appendChild(toast);
+      var toastTimer = null, clicks = 0;
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 1800);
+      }
+      var MSGS = {
+        zh: ["🦀 吱～", "🦀 别戳啦", "🦀 再戳要生气了", "🎉 恭喜发现螃蟹彩蛋！"],
+        en: ["🦀 squeak~", "🦀 stop poking", "🦀 getting angry...", "🎉 You found the crab easter egg!"]
+      };
       av.addEventListener("click", function () {
         av.classList.remove("wiggle");
         void av.offsetWidth;
         av.classList.add("wiggle");
-        if (++clicks === 5) {
-          av.title = "🦀 🎉 You found the crab!";
-          setTimeout(function () { clicks = 0; }, 4000);
-        }
+        var set = MSGS[lang] || MSGS.en;
+        showToast(set[Math.min(clicks, 3)]);
+        clicks = clicks >= 4 ? 0 : clicks + 1;
       });
     })();
 
