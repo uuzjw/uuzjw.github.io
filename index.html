@@ -12,7 +12,7 @@
   <meta property="og:image" content="assets/avatar.png" />
   <meta property="og:url" content="https://uuzjw.github.io/" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#c65a3a" />
+  <meta name="theme-color" content="#1a1a1a" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="uuzjw · Open Source Enthusiast / Indie Developer" />
   <meta name="twitter:description" content="Author of wow-agent & formatix. AI Agent, terminal tools, edge devices." />
@@ -21,18 +21,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #16100d;
-      --bg-soft: #201815;
-      --surface: #241b17;
-      --text: #f4ece6;
-      --text-2: #c9b8ae;
-      --text-3: #8a7a70;
-      --brand: #e08a66;
-      --brand-deep: #c65a3a;
-      --brand-hi: #f0a582;
-      --grad: linear-gradient(135deg, #c65a3a, #e8926e);
-      --border: #362822;
-      --glow: rgba(216, 112, 80, .45);
+      --bg: #0e0e0f;
+      --bg-soft: #1a1a1a;
+      --surface: #1e1e1e;
+      --text: #f2f2f2;
+      --text-2: #b0b0b0;
+      --text-3: #7a7a7a;
+      --brand: #9e9e9e;
+      --brand-deep: #5a5a5a;
+      --brand-hi: #d0d0d0;
+      --grad: linear-gradient(135deg, #2e2e2e, #8a8a8a);
+      --border: #2e2e2e;
+      --glow: rgba(160,160,160,.18);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 70px; }
@@ -46,9 +46,9 @@
 
     .bg-orbs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
     .orb { position: absolute; border-radius: 50%; filter: blur(110px); opacity: .3; animation: drift 11s ease-in-out infinite; }
-    .orb-1 { width: 460px; height: 460px; background: #c65a3a; top: -140px; right: -100px; }
-    .orb-2 { width: 340px; height: 340px; background: #e8926e; bottom: -100px; left: -80px; animation-delay: -4s; opacity: .18; }
-    .orb-3 { width: 240px; height: 240px; background: #d87050; top: 45%; left: 60%; opacity: .12; animation-delay: -7s; }
+    .orb-1 { width: 460px; height: 460px; background: #3a3a3a; top: -140px; right: -100px; }
+    .orb-2 { width: 340px; height: 340px; background: #5a5a5a; bottom: -100px; left: -80px; animation-delay: -4s; opacity: .18; }
+    .orb-3 { width: 240px; height: 240px; background: #6e6e6e; top: 45%; left: 60%; opacity: .12; animation-delay: -7s; }
     @keyframes drift { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-26px) } }
 
     /* --- NAV --- */
@@ -96,12 +96,12 @@
     .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 1.4rem 3rem; position: relative; }
     .avatar {
       width: 138px; height: 138px; border-radius: 30px; background: #fff; padding: 6px;
-      box-shadow: 0 0 0 2px rgba(224,138,102,.35), 0 14px 44px -8px var(--glow);
+      box-shadow: 0 0 0 2px rgba(160,160,160,.18), 0 14px 44px -8px var(--glow);
       animation: pop .8s cubic-bezier(.16,1,.3,1) both;
     }
     @keyframes pop { from { opacity: 0; transform: scale(.85) translateY(16px) } to { opacity: 1; transform: none } }
     .avatar { cursor: pointer; user-select: none; transition: box-shadow .3s; }
-    .avatar:hover { box-shadow: 0 0 0 3px rgba(224,138,102,.5), 0 20px 50px -8px var(--glow); }
+    .avatar:hover { box-shadow: 0 0 0 3px rgba(160,160,160,.28), 0 20px 50px -8px var(--glow); }
     .avatar.wiggle { animation: wiggle .6s cubic-bezier(.36,.07,.19,.97) both; }
     @keyframes wiggle {
       0%,100% { transform: rotate(0) }
@@ -150,7 +150,7 @@
     /* --- ABOUT --- */
     .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.2rem; }
     .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.7rem 1.8rem; transition: border-color .3s, box-shadow .3s; }
-    .panel:hover { border-color: rgba(224,138,102,.3); box-shadow: 0 8px 30px -8px rgba(216,112,80,.15); }
+    .panel:hover { border-color: rgba(160,160,160,.15); box-shadow: 0 8px 30px -8px rgba(160,160,160,.08); }
     .panel p { color: var(--text-2); font-size: .97rem; }
     .panel p + p { margin-top: .8rem; }
     .panel strong { color: var(--text); }
@@ -158,7 +158,7 @@
     .fact { display: flex; align-items: center; gap: .7rem; font-size: .93rem; color: var(--text-2); }
     .fact b { color: var(--text); font-weight: 600; }
     .fact .ico { width: 34px; height: 34px; border-radius: 9px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .2s; }
-    .fact:hover .ico { background: rgba(224,138,102,.12); }
+    .fact:hover .ico { background: rgba(160,160,160,.08); }
 
     /* --- PROJECTS --- */
     .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
@@ -169,9 +169,9 @@
     .proj-card.wide { grid-column: 1 / -1; }
     .proj-head { display: flex; align-items: center; gap: .85rem; margin-bottom: .7rem; }
     .proj-head .pico { width: 44px; height: 44px; border-radius: 11px; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; transition: background .2s; }
-    .proj-card:hover .pico { background: rgba(224,138,102,.12); }
+    .proj-card:hover .pico { background: rgba(160,160,160,.08); }
     .proj-head h3 { font-size: 1.18rem; color: var(--text); }
-    .proj-tag { margin-left: auto; font-size: .72rem; font-weight: 700; letter-spacing: .06em; color: var(--brand-hi); background: rgba(216,112,80,.14); border: 1px solid rgba(216,112,80,.35); padding: .22rem .6rem; border-radius: 99px; flex-shrink: 0; }
+    .proj-tag { margin-left: auto; font-size: .72rem; font-weight: 700; letter-spacing: .06em; color: var(--brand-hi); background: rgba(160,160,160,.10); border: 1px solid rgba(160,160,160,.20); padding: .22rem .6rem; border-radius: 99px; flex-shrink: 0; }
     .proj-card p { color: var(--text-2); font-size: .94rem; margin-bottom: 1rem; }
     .meta { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
     .tag { font-size: .78rem; color: var(--text-2); background: var(--bg-soft); border: 1px solid var(--border); padding: .18rem .6rem; border-radius: 99px; transition: border-color .2s, color .2s; }
@@ -189,12 +189,12 @@
     .tl-title { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: .25rem; }
     .tl-desc { font-size: .92rem; color: var(--text-2); }
     .tl-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .5rem; }
-    .tl-tag { font-size: .72rem; color: var(--brand-hi); background: rgba(216,112,80,.1); border: 1px solid rgba(216,112,80,.25); padding: .12rem .5rem; border-radius: 99px; }
+    .tl-tag { font-size: .72rem; color: var(--brand-hi); background: rgba(160,160,160,.06); border: 1px solid rgba(160,160,160,.12); padding: .12rem .5rem; border-radius: 99px; }
 
     /* --- SKILLS --- */
     .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.1rem; }
     .skill { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.3rem 1.4rem; transition: transform .25s, border-color .25s, box-shadow .25s; }
-    .skill:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: 0 8px 24px -6px rgba(216,112,80,.2); }
+    .skill:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: 0 8px 24px -6px rgba(160,160,160,.10); }
     .skill h4 { font-size: .98rem; margin-bottom: .55rem; }
     .skill ul { list-style: none; }
     .skill li { color: var(--text-2); font-size: .88rem; padding: .18rem 0 .18rem 1.1rem; position: relative; }
@@ -203,15 +203,15 @@
     /* --- BLOG --- */
     .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; }
     .blog-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 1.6rem; text-decoration: none; display: block; transition: transform .3s, box-shadow .3s, border-color .3s; }
-    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px -8px var(--glow); border-color: rgba(224,138,102,.3); }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px -8px var(--glow); border-color: rgba(160,160,160,.15); }
     .blog-date { font-size: .78rem; color: var(--brand); font-weight: 600; font-family: "JetBrains Mono", monospace; margin-bottom: .5rem; }
     .blog-card h3 { font-size: 1.05rem; color: var(--text); margin-bottom: .5rem; line-height: 1.4; }
     .blog-card p { font-size: .9rem; color: var(--text-2); line-height: 1.6; }
     .blog-more { text-align: center; margin-top: 2rem; }
 
     /* --- CONTACT --- */
-    .contact-box { text-align: center; background: linear-gradient(135deg, rgba(198,90,58,.16), rgba(232,146,110,.1)); border: 1px solid var(--border); border-radius: 20px; padding: 3rem 2rem; transition: border-color .3s; }
-    .contact-box:hover { border-color: rgba(224,138,102,.3); }
+    .contact-box { text-align: center; background: linear-gradient(135deg, rgba(80,80,80,.12), rgba(120,120,120,.06)); border: 1px solid var(--border); border-radius: 20px; padding: 3rem 2rem; transition: border-color .3s; }
+    .contact-box:hover { border-color: rgba(160,160,160,.15); }
     .contact-box h2 { font-size: 1.7rem; margin-bottom: .5rem; }
     .contact-box p { color: var(--text-2); margin-bottom: 1.8rem; }
     .mail-row { display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap; }
@@ -388,7 +388,7 @@
             <h3>uuzjw.github.io</h3>
             <span class="proj-tag" data-i18n="tag_site">本站</span>
           </div>
-          <p data-i18n="proj_home">我的个人主页 —— 深色珊瑚橙主题、终端风格、中英双语。</p>
+          <p data-i18n="proj_home">我的个人主页 —— 黑灰极简主题、终端风格、中英双语。</p>
           <div class="meta">
             <span class="tag">HTML</span><span class="tag">GitHub Pages</span>
           </div>
@@ -577,10 +577,10 @@
         proj_t: "Projects", proj_sub: "ALL PUBLIC REPOS",
         proj_wow: "A coding agent in your terminal: connect any OpenAI-compatible model or local models (Ollama / LM Studio). Four layers — Agent Brain (planning · state machine · sub-agents), Dev Tools (Diff/Undo · AST code index), Model Ecosystem (16+ providers), Safety System (network sandbox · egress guard · double confirm · one-click rollback). Native ARM64 edge support.",
         proj_formatix: "A fast, private, browser-based file format converter — files never leave your machine.",
-        proj_home: "My personal homepage — dark coral theme, terminal vibes, bilingual.",
+        proj_home: "My personal homepage — black-gray minimal theme, terminal vibes, bilingual.",
         proj_skills: "Official GitHub Skills introduction exercise — getting familiar with repos, branches and pull requests.",
         tag_site: "THIS SITE", tag_exercise: "Exercise",
-        tl_t: "Journey", tl_sub: "MY PATH",
+        tl_t: "Journey", tl_sub: "JOURNEY",
         tl1_title: "wow-agent Core Development", tl1_desc: "Building a terminal coding agent from scratch: task planning · state machine · sub-agents · AST code index · 16+ model providers · triple safety system. Native ARM64 edge support on Jetson Orin NX.",
         tl2_title: "formatix Release", tl2_desc: "Released browser-based file format converter: pure frontend, privacy-first, files never leave your device.",
         tl3_title: "AI Agent Exploration", tl3_desc: "Deep dive into LLM applications and Agent architecture. Exploring MCP protocol and tool-calling paradigms for terminal integration.",
@@ -615,7 +615,7 @@
         proj_t: "项目", proj_sub: "全部公开仓库 · GITHUB PUBLIC REPOS",
         proj_wow: "终端里的编码 Agent：接入任意 OpenAI 兼容模型与本地模型（Ollama / LM Studio）。四层架构 —— 智能核心（任务规划 · 状态机 · 子代理）、开发工具（Diff/Undo · AST 代码索引）、模型生态（16+ 服务商）、安全系统（断网沙盒 · 外传拦截 · 高危二次确认 · 一键回滚）。原生支持 ARM64 边缘设备。",
         proj_formatix: "快速、私有的浏览器端文件格式转换器 —— 文件不上传服务器，全部在本地完成转换。",
-        proj_home: "我的个人主页 —— 深色珊瑚橙主题、终端风格、中英双语。",
+        proj_home: "我的个人主页 —— 黑灰极简主题、终端风格、中英双语。",
         proj_skills: "GitHub Skills 官方入门练习 —— 熟悉仓库、分支与 Pull Request 工作流。",
         tag_site: "本站", tag_exercise: "练习",
         tl_t: "经历", tl_sub: "JOURNEY",
